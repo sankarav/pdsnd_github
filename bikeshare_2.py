@@ -43,12 +43,10 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
+def sanitize_user_input(user_input: str) -> str:
+    return user_input.strip().lower() if user_input else None
+
 def get_filter(msg: str, valid_values: List[str]) -> str:
-    def sanitize_user_input(user_input: str) -> str:
-        if user_input:
-            return user_input.strip().lower()
-        else:
-            return None
 
     while True:
         original_user_input = input(msg)
