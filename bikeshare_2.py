@@ -27,28 +27,38 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    cities = list(CITY_DATA.keys())
-    city = get_filter('Would you like to see data for {}? \n'.format(cities), cities)
-    print_acknowledge_msg_to_user('city', city)
+
+    # get user input for city (chicago, new york city, washington).
+    city = get_user_choice('city', CITY_DATA.keys())
 
     # get user input for month (all, january, february, ... , june)
-    month = get_filter('Would you like to filter data for month {}? \n'.format(MONTHS), MONTHS)
-    print_acknowledge_msg_to_user('month', month)
+    month = get_user_choice('month', MONTHS)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = get_filter('Would you like to filter data for month {}? \n'.format(DAYS), DAYS)
-    print_acknowledge_msg_to_user('day', day)
+    day = get_user_choice('day', DAYS)
 
     print('-'*40)
     return city, month, day
 
+def get_user_choice(criteria, options):
+    """
+    Helper function to get user input for a given criteria.
+
+    Args:
+        (str) criteria - criteria name for which the data is to be filtered
+        (list) options - list of valid options for the criteria
+
+    Returns:
+        (str) choice - user selected choice from the options
+    """
+    choice = get_filter(f'Would you like to see data for {list(options)}? \n', options)
+    print_acknowledge_msg_to_user(criteria, choice)
+    return choice
+
+def sanitize_user_input(user_input: str) -> str:
+    return user_input.strip().lower() if user_input else None
+
 def get_filter(msg: str, valid_values: List[str]) -> str:
-    def sanitize_user_input(user_input: str) -> str:
-        if user_input:
-            return user_input.strip().lower()
-        else:
-            return None
 
     while True:
         original_user_input = input(msg)
@@ -170,16 +180,14 @@ def station_stats(df):
     start_time = time.time()
 
     # display most commonly used start station
-    val_counts = df['Start Station'].value_counts()
-    print_stats(val_counts, 'Start Station')
+    print_stats(df['Start Station'].value_counts(), 'Start Station')
 
     # display most commonly used end station
-    val_counts = df['End Station'].value_counts()
-    print_stats(val_counts, 'End Station')
+    print_stats(df['End Station'].value_counts(), 'End Station')
 
     # display most frequent combination of start station and end station trip
-    val_counts = df[['Start Station', 'End Station']].value_counts(subset=['Start Station', 'End Station'])
-    print_stats(val_counts, 'Start -> End Station combination')
+    print_stats(df[['Start Station', 'End Station']].value_counts(subset=['Start Station', 'End Station']),
+                'Start -> End Station combination')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print_stats_group_line_break()
