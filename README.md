@@ -20,5 +20,7 @@ The project uses Python and libraries such as Pandas and NumPy for data manipula
 Include the files used
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+- [Udacity](https://www.udacity.com/): Project is part of Udacity's **Introduction to Programming for Data Science** Nanodegree Program
+- [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/): For data manipulation and analysis.
+- [NumPy Documentation](https://numpy.org/doc/): For numerical operations.
 
