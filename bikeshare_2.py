@@ -260,15 +260,15 @@ def print_raw_data(df, chunk_size=5):
                 break
 
 def print_stats_group_line_break():
-    """Use it to add a line break in console after each statistic-group is printed"""
+    """prints a line break to console after each statistic-group"""
     print('-'*40)
 
 def print_stat_line_break():
-    """Use it to add a line break in console after each statistic is printed"""
+    """prints a line break to console after each statistic"""
     print('*'*40)
 
 def print_run_iteration_line_break():
-    """Use it to add a line break in console after each iteration"""
+    """prints a line break to console after each iteration of the program"""
     print('\n'*6)
     print('%'*70)
 
