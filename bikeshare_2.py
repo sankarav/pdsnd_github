@@ -27,21 +27,33 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    cities = list(CITY_DATA.keys())
-    city = get_filter('Would you like to see data for {}? \n'.format(cities), cities)
-    print_acknowledge_msg_to_user('city', city)
+
+    # get user input for city (chicago, new york city, washington).
+    city = get_user_choice('city', CITY_DATA.keys())
 
     # get user input for month (all, january, february, ... , june)
-    month = get_filter('Would you like to filter data for month {}? \n'.format(MONTHS), MONTHS)
-    print_acknowledge_msg_to_user('month', month)
+    month = get_user_choice('month', MONTHS)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = get_filter('Would you like to filter data for month {}? \n'.format(DAYS), DAYS)
-    print_acknowledge_msg_to_user('day', day)
+    day = get_user_choice('day', DAYS)
 
     print('-'*40)
     return city, month, day
+
+def get_user_choice(criteria, options):
+    """
+    Helper function to get user input for a given criteria.
+
+    Args:
+        (str) criteria - criteria name for which the data is to be filtered
+        (list) options - list of valid options for the criteria
+
+    Returns:
+        (str) choice - user selected choice from the options
+    """
+    choice = get_filter(f'Would you like to see data for {list(options)}? \n', options)
+    print_acknowledge_msg_to_user(criteria, choice)
+    return choice
 
 def sanitize_user_input(user_input: str) -> str:
     return user_input.strip().lower() if user_input else None
